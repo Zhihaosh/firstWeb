@@ -7,16 +7,19 @@
     </div>
     <div class = "form-group">
       <label for = "problemDes">Problem Description</label>
-      <input type = "text" row="3" class = "form-control" id = "problemDes"
+      <input type = "text" row=3 class = "form-control" id = "problemDes"
        name="problemDes" required placeholder="Enter Problem Description" [(ngModel)]="newProblem.des">
     </div>
     <div class = "form-group">
       <label for = "difficulty">Difficulty</label>
       <select class = "form-control" id = "difficulty"
        name="difficulty" required [(ngModel)]="newProblem.difficulty">
-       <option *ngFor="let difficulty of difficulties" [value]="difficulty">
+       <option disabled selected value="default">
+          Select difficulty
+        </option>
+        <option *ngFor="let difficulty of difficulties" [value]="difficulty">
           {{difficulty}}
-       </option>
+        </option>
      </select>
     </div>
     <div class="row">
