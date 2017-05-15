@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="authGuard.isAdmin()">
   <form #formRef="ngForm">
     <div class = "form-group">
       <label for = "problemName">Problem Name</label>
