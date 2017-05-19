@@ -11,6 +11,9 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "mongoose": "^4.9.9"
+    "mongoose": "^4.9.9",
+    "node-rest-client": "^3.1.0",
+    "redis": "^2.7.1",
+    "socket.io": "^2.0.1"
   }
 }

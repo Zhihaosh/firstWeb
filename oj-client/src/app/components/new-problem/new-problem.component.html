@@ -13,10 +13,7 @@
     <div class = "form-group">
       <label for = "difficulty">Difficulty</label>
       <select class = "form-control" id = "difficulty"
-       name="difficulty" required [(ngModel)]="newProblem.difficulty">
-       <option disabled selected value="default">
-          Select difficulty
-        </option>
+       name="difficulty" require  [(ngModel)]="newProblem.difficulty">
         <option *ngFor="let difficulty of difficulties" [value]="difficulty">
           {{difficulty}}
         </option>
