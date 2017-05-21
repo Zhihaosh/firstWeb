@@ -22,7 +22,7 @@ app.use(function(req, res){
 var server = http.createServer(app);
 io.attach(server);
 
-server.listen(3000);
+server.listen(80);
 server.on('error()', onError);
 server.on('listening', onListening);
 
