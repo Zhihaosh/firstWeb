@@ -5,7 +5,7 @@ const DEFAULT_PROBLEM: Problem = Object.freeze({
   id : 0,
   name :"",
   des:"",
-  difficulty:""
+  difficulty: null
 })
 
 @Component({

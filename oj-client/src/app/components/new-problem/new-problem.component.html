@@ -1,5 +1,5 @@
 <div class="container" *ngIf="authGuard.isAdmin()">
-  <form #formRef="ngForm">
+  <form #formRef="ngForm" (ngSubmit)="addProblem()">
     <div class = "form-group">
       <label for = "problemName">Problem Name</label>
       <input type = "text" class = "form-control" id = "problemName"
@@ -21,7 +21,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <button type="submit" class="btn btn-primary pull-right" (click)="addProblem()">Add Problem</button>
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!formRef.form.valid">Add Problem</button>
       </div>
     </div>
   </form>
