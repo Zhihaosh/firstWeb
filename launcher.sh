@@ -8,7 +8,7 @@ service redis_6379 start &
 cd ./oj-server
 npm install
 
-nodemon server.js --host 34.209.49.174 &
+nodemon server.js &
 cd ../oj-client
 npm install
 ng build --watch &

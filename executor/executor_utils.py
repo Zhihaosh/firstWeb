@@ -8,24 +8,34 @@ CURRENT_RID = os.path.dirname(os.path.realpath(__file__));
 TEMP_BUILD_DIR = "%s/tmp/" %CURRENT_RID
 IMAGE_NAME = "shanzhihao/oj_demo_1"
 
-BUILD_COMMANDS={
+BUILD_COMMANDS_pre={
     "java" : "javac",
-    "python" : "python"
+    "python" : "python",
+    "c++": "g++"
+}
+
+BUILD_COMMANDS_suff={
+    "java" : "",
+    "python" : "",
+    "c++" : "-o example"
 }
 
 SOURCE_FILE_NAMES={
     "java": "Example.java",
-    "python": "example.py"
+    "python": "example.py",
+    "c++": "example.cpp"
 }
 
 BINARY_NAMES={
     "java": "Example",
-    "python": "example.py"
+    "python": "example.py",
+    "c++" : "example"
 }
 
 EXECUTE_COMMANDS={
     "java": "java",
-    "python": "python"
+    "python": "python",
+    "c++": "./"
 }
 
 client = docker.from_env();
@@ -57,7 +67,7 @@ def build_and_run(code, lang):
     try:
         client.containers.run(
             image=IMAGE_NAME,
-            command="%s %s" %(BUILD_COMMANDS[lang], SOURCE_FILE_NAMES[lang]),
+            command="%s %s %s" %(BUILD_COMMANDS_pre[lang], SOURCE_FILE_NAMES[lang], BUILD_COMMANDS_suff[lang]),
             volumes={source_file_host_dir: {'bind': source_file_guest_dir, 'mode': 'rw'}},
             working_dir=source_file_guest_dir)
         print "Source build"
@@ -68,11 +78,19 @@ def build_and_run(code, lang):
         shutil.rmtree(source_file_host_dir)
         return result
     try:
-        log = client.containers.run(
-            image=IMAGE_NAME,
-            command="%s %s" %(EXECUTE_COMMANDS[lang], BINARY_NAMES[lang]),
-            volumes={source_file_host_dir: {'bind': source_file_guest_dir, 'mode': 'rw'}},
-            working_dir=source_file_guest_dir)
+        if lang != "c++":
+            log = client.containers.run(
+                image=IMAGE_NAME,
+                command="%s %s" %(EXECUTE_COMMANDS[lang], BINARY_NAMES[lang]),
+                volumes={source_file_host_dir: {'bind': source_file_guest_dir, 'mode': 'rw'}},
+                working_dir=source_file_guest_dir)
+        else:
+            log = client.containers.run(
+                image=IMAGE_NAME,
+                command="%s%s" %(EXECUTE_COMMANDS[lang], BINARY_NAMES[lang]),
+                volumes={source_file_host_dir: {'bind': source_file_guest_dir, 'mode': 'rw'}},
+                working_dir=source_file_guest_dir)
+
         print "Executed."
         result['run'] = log
     except ContainerError as e:

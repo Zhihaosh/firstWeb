@@ -27,10 +27,10 @@ export class NewProblemComponent implements OnInit {
   }
 
   addProblem(): void{
-
-    this.data.addProblem(this.newProblem)
-              .catch(error => console.log(error.body));
-
+    if(this.newProblem.name != "" && this.newProblem.des != "" && this.newProblem.difficulty != ""){
+      this.data.addProblem(this.newProblem)
+                .catch(error => console.log(error.body));
+    }
     this.newProblem = Object.assign({},DEFAULT_PROBLEM);
   }
 

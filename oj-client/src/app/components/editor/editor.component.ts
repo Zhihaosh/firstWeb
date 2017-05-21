@@ -22,8 +22,8 @@ export class EditorComponent implements OnInit {
           //Type your code
       }
     }`,
-    'C++':`#include<iostream>
-    using namespace std:
+    'C++':`#include <iostream>
+    using namespace std;
     int main(){
       //Type your C++ code here
       return 0;
